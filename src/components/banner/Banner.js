@@ -14,8 +14,12 @@ const Banner = () => {
     fetcher
   );
   const movies = data?.results || [];
+  const loading = !data;
   return (
     <section className="banner page-container mb-10 overflow-hidden">
+      {loading && (
+        <div className="w-10 h-10 rounded-full border-4 border-primary border-t-4 border-t-transparent mx-auto animate-spin mb-10"></div>
+      )}
       <Swiper
         grabCursor="true"
         slidesPerView={"auto"}
