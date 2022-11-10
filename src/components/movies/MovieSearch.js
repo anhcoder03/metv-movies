@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 import Swiper, { Navigation, Pagination } from "swiper";
 import { SwiperSlide } from "swiper/react";
 import useSWR from "swr";
@@ -11,6 +12,7 @@ const MovieSearch = () => {
   const [nextPage, setNextPage] = useState(1);
   const filterDebounce = useDebounce(filter, 500);
   const { data } = useSWR(url, fetcher);
+
   const [url, setUrl] = useState(
     `https://api.themoviedb.org/3/movie/popular?api_key=95f2419536f533cdaa1dadf83c606027&page=${nextPage}`
   );

@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Main from "./components/layout/Main";
 import HomePage from "./pages/HomePage";
 import ResultSearchPage from "./pages/ResultSearchPage";
+import TvSeries from "./pages/TvSeries";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
         <Routes>
           <Route element={<Main></Main>}>
             <Route
-              path="/"
+              path="/*"
               element={
                 <>
                   <HomePage></HomePage>
@@ -21,7 +22,17 @@ function App() {
           </Route>
           <Route element={<Main></Main>}>
             <Route
-              path="/abv"
+              path="/tvseries"
+              element={
+                <>
+                  <TvSeries></TvSeries>
+                </>
+              }
+            ></Route>
+          </Route>
+          <Route element={<Main></Main>}>
+            <Route
+              path="/celebs"
               element={
                 <>
                   <HomePage></HomePage>
@@ -31,19 +42,11 @@ function App() {
           </Route>
           <Route element={<Main></Main>}>
             <Route
-              path="/abc"
+              path="/movies/search/page/1"
               element={
                 <>
-                  <HomePage></HomePage>
+                  <ResultSearchPage />
                 </>
-              }
-            ></Route>
-          </Route>
-          <Route element={<Main></Main>}>
-            <Route
-              path="movies/search/page/:page"
-              element={
-                ResultSearchPage
               }
             ></Route>
           </Route>

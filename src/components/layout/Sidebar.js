@@ -1,24 +1,42 @@
 import React from "react";
+import {
+  createSearchParams,
+  useNavigate,
+  useRoutes,
+  useSearchParams,
+} from "react-router-dom";
 import useSWR from "swr";
 import { fetcher } from "../../config";
-import handleQueryChange from "../movies/MovieSearch";
 const Sidebar = () => {
   const { data } = useSWR(
     `https://api.themoviedb.org/3/movie/upcoming?api_key=95f2419536f533cdaa1dadf83c606027`,
     fetcher
   );
   const movies = data?.results || [];
-  console.log(movies);
+  const navigate = useNavigate();
+  function handleSubmit(event) {
+    event.preventDefault();
+    // đm 8 tiếng =))
+    const input = event.target.querySelectorAll(".inputtt");
+    navigate({
+      pathname: `/movies/search/page/1`,
+      search: `?${createSearchParams({ query: input[0].value })}`,
+    });
+  }
   return (
     <div className="h-[68px] overflow-hidden no-scrollbar fixed bottom-0 left-0 right-0 z-[100] flex w-full flex-col bg-[#181818] pb-4 text-[#ececec] transition-all duration-200 ease-in lg:relative  lg:z-auto  lg:h-screen lg:w-[22%] lg:overflow-scroll lg:border-l-2 lg:border-[#353535] lg:pb-5 xl:w-[22%] 2xl:w-[22%]">
       <div className="px-4">
-        <div className="sticky top-0 z-50 flex bg-[#181818] bg-opacity-95 py-4">
+        <form
+          method="post"
+          onSubmit={handleSubmit}
+          className="sticky top-0 z-50 flex bg-[#181818] bg-opacity-95 py-4"
+        >
           <div className="flex-1">
             <input
+              name="page"
               type="text"
               placeholder="Type here to search..."
-              className="w-full p-4 bg-[#252229] text-white rounded-l-lg outline-none"
-              onChange={handleQueryChange}
+              className=" inputtt w-full p-4 bg-[#252229] text-white rounded-l-lg outline-none"
             />
           </div>
           <button className="p-4 bg-[#252229] text-white rounded-r-lg">
@@ -37,7 +55,7 @@ const Sidebar = () => {
               />
             </svg>
           </button>
-        </div>
+        </form>
         <div className="mt-5 grid overflow-scroll no-scrollbar my-10">
           <div className="flex flex-col gap-y-5">
             <h2 className="mb-5 text-2xl font-medium text-[#ECECEC]">
