@@ -1,8 +1,11 @@
 import { Fragment } from "react";
 import { Route, Routes } from "react-router-dom";
 import Main from "./components/layout/Main";
+import CelebsPage from "./pages/CelebsPage";
 import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
 import ResultSearchPage from "./pages/ResultSearchPage";
+import SignUpPage from "./pages/SignUpPage";
 import TvSeries from "./pages/TvSeries";
 
 function App() {
@@ -12,7 +15,7 @@ function App() {
         <Routes>
           <Route element={<Main></Main>}>
             <Route
-              path="/*"
+              path="/"
               element={
                 <>
                   <HomePage></HomePage>
@@ -35,7 +38,7 @@ function App() {
               path="/celebs"
               element={
                 <>
-                  <HomePage></HomePage>
+                  <CelebsPage></CelebsPage>
                 </>
               }
             ></Route>
@@ -46,6 +49,26 @@ function App() {
               element={
                 <>
                   <ResultSearchPage />
+                </>
+              }
+            ></Route>
+          </Route>
+          <Route element={<Main></Main>}>
+            <Route
+              path="login"
+              element={
+                <>
+                  <LoginPage></LoginPage>
+                </>
+              }
+            ></Route>
+          </Route>
+          <Route element={<Main></Main>}>
+            <Route
+              path="signup"
+              element={
+                <>
+                  <SignUpPage></SignUpPage>
                 </>
               }
             ></Route>

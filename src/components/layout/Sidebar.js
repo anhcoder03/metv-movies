@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  createSearchParams,
-  useNavigate,
-  useRoutes,
-  useSearchParams,
-} from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import useSWR from "swr";
 import { fetcher } from "../../config";
 const Sidebar = () => {

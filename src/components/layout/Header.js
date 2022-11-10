@@ -26,7 +26,7 @@ const Header = () => {
                 Movies
               </NavLink>
               <NavLink
-                to="/abv"
+                to="/tvseries"
                 className={({ isActive }) =>
                   isActive
                     ? "text-primary text-xl"
@@ -36,7 +36,7 @@ const Header = () => {
                 TV Series
               </NavLink>
               <NavLink
-                to="/abc"
+                to="/celebs"
                 className={({ isActive }) =>
                   isActive
                     ? "text-primary text-xl"

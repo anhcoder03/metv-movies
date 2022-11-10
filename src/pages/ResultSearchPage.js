@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import React from "react";
+import { useLocation } from "react-router-dom";
 import useSWR from "swr";
 import MovieItem from "../components/movies/MovieItem";
 import { fetcher } from "../config";
