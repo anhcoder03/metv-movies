@@ -1,5 +1,5 @@
 import React from "react";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate  } from "react-router-dom";
 import useSWR from "swr";
 import { fetcher } from "../../config";
 const Sidebar = () => {
@@ -11,7 +11,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
   function handleSubmit(event) {
     event.preventDefault();
-    // đm 8 tiếng =))
+    // fuck 8 hours mine =))
     const input = event.target.querySelectorAll(".inputtt");
     navigate({
       pathname: `/movies/search/page/1`,

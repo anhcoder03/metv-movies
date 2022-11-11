@@ -15,7 +15,6 @@ const ResultSearchPage = () => {
     fetcher
   );
   const movies = data?.results || [];
-  console.log(movies);
   const loading = !data;
   return (
     <div className="no-scrollbar ml-[10%] h-screen overflow-scroll w-[68%] bg-[#252229] ">

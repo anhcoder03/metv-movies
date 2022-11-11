@@ -1,8 +1,8 @@
 import React from "react";
 // import { useNavigate } from "react-router-dom";
 
-const MovieItem = ({ item }) => {
-  const { title, vote_average, release_date, poster_path } = item;
+const TvSeriesItem = ({ item }) => {
+  const { name, vote_average, first_air_date, poster_path } = item;
   return (
     <div className="movie-cart cursor-pointer flex flex-col h-full rounded-lg p-3 bg-[#33292e] transition-all text-white select-none hover:bg-[#3d3137]">
       <img
@@ -11,9 +11,9 @@ const MovieItem = ({ item }) => {
         className="w-full h-[250px] object-cover rounded-lg mb-5"
       />
       <div className="flex flex-col flex-1">
-        <h3 className="text-xl font-bold mb-3 truncate">{title}</h3>
+        <h3 className="text-xl font-bold mb-3 truncate">{name}</h3>
         <div className="flex items-center justify-between text-sm opacity-50 mb-10">
-          <span>{new Date(release_date).getFullYear()}</span>
+          <span>{new Date(first_air_date).getFullYear()}</span>
           <span>
             {vote_average}
             <svg
@@ -50,4 +50,4 @@ const MovieItem = ({ item }) => {
   );
 };
 
-export default MovieItem;
+export default TvSeriesItem;
