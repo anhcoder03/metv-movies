@@ -1,5 +1,5 @@
 import React from "react";
-import { createSearchParams, useNavigate  } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import useSWR from "swr";
 import { fetcher } from "../../config";
 const Sidebar = () => {
@@ -18,23 +18,42 @@ const Sidebar = () => {
       search: `?${createSearchParams({ query: input[0].value })}`,
     });
   }
+  function handleClickSidebar() {
+    const sidebar = document.querySelector(".sidebar");
+    sidebar.classList.toggle("h-[68px]");
+    sidebar.classList.toggle("h-full");
+    sidebar.classList.toggle("overflow-scroll");
+  }
   return (
-    <div className="h-[68px] overflow-hidden no-scrollbar fixed bottom-0 left-0 right-0 z-[100] flex w-full flex-col bg-[#181818] pb-4 text-[#ececec] transition-all duration-200 ease-in lg:relative  lg:z-auto  lg:h-screen lg:w-[22%] lg:overflow-scroll lg:border-l-2 lg:border-[#353535] lg:pb-5 xl:w-[22%] 2xl:w-[22%]">
+    <div className="h-[68px] overflow-hidden no-scrollbar fixed bottom-0 left-0 right-0 z-[100] flex w-full flex-col bg-[#181818] pb-4 text-[#ececec] transition-all duration-200 ease-in lg:relative  lg:z-auto  lg:h-screen lg:w-[20%] lg:overflow-scroll lg:border-l-2 lg:border-[#353535] lg:pb-5 xl:w-[20%] 2xl:w-[20%] sidebar">
       <div className="px-4">
         <form
           method="post"
           onSubmit={handleSubmit}
-          className="sticky top-0 z-50 flex bg-[#181818] bg-opacity-95 py-4"
+          className="sticky top-0 z-50 flex  bg-[#181818] bg-opacity-95 py-3 px-3 lg:py-4 xl:px-0"
         >
+          <svg
+            onClick={handleClickSidebar}
+            stroke="currentColor"
+            fill="currentColor"
+            stroke-width="0"
+            viewBox="0 0 512 512"
+            className="rounded-[10px] bg-[#252229] p-2 mr-2 text-[44px] lg:hidden"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M256 217.9L383 345c9.4 9.4 24.6 9.4 33.9 0 9.4-9.4 9.3-24.6 0-34L273 167c-9.1-9.1-23.7-9.3-33.1-.7L95 310.9c-4.7 4.7-7 10.9-7 17s2.3 12.3 7 17c9.4 9.4 24.6 9.4 33.9 0l127.1-127z"></path>
+          </svg>
           <div className="flex-1">
             <input
               name="page"
               type="text"
               placeholder="Type here to search..."
-              className=" inputtt w-full p-4 bg-[#252229] text-white rounded-l-lg outline-none"
+              className=" inputtt w-full truncate rounded-l-lg bg-[#252229] px-[15px] py-[10px] outline-none"
             />
           </div>
-          <button className="p-4 bg-[#252229] text-white rounded-r-lg">
+          <button className=" px-[15px] py-[10px] bg-[#252229] text-white rounded-r-lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

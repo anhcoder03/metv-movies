@@ -17,15 +17,15 @@ const ResultSearchPage = () => {
   const movies = data?.results || [];
   const loading = !data;
   return (
-    <div className="no-scrollbar ml-[10%] h-screen overflow-scroll w-[68%] bg-[#252229] ">
-      <div className="p-10">
+    <div className="no-scrollbar h-screen mt-14 overflow-scroll w-full bg-[#252229] lg:w-[70%] lg:mt-0 lg:ml-[10%]">
+      <div className="px-3 py-10 lg:p-10">
         <h2 className="text-center text-white font-bold text-3xl mb-10">
           Movies Search List
         </h2>
         {loading && (
           <div className="w-10 h-10 rounded-full border-4 border-primary border-t-transparent border-t-4 mx-auto animate-spin"></div>
         )}
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {movies.length > 0 &&
             movies.map((item) => (
               <MovieItem key={item.id} item={item}></MovieItem>

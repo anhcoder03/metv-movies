@@ -55,7 +55,7 @@ function BannerItem({ item }) {
         alt=""
         className="w-full h-full object-cover rounded-lg"
       />
-      <div className="w-full text-white absolute bottom-10 left-10">
+      <div className="w-full bottom-8 left-3 text-white absolute lg:bottom-10 lg:left-10">
         <h2 className="font-bold text-3xl mb-3">{name}</h2>
         <p className="mr-1 flex items-center mb-3 text-base font-bold lg:text-xl">
           <svg

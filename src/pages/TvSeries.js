@@ -5,8 +5,8 @@ import TvSeriesTopRated from "../components/tvseris/TvSeriesTopRated";
 
 const TvSeries = () => {
   return (
-    <div className="no-scrollbar ml-[10%] h-screen overflow-scroll w-[68%] bg-[#252229] ">
-      <div className="p-10">
+    <div className="no-scrollbar h-screen mt-14 overflow-scroll w-full bg-[#252229] lg:w-[70%] lg:mt-0 lg:ml-[10%]">
+      <div className="px-3 py-10 lg:p-10">
         <BannerTvSeries></BannerTvSeries>
         <div className="relative">
           <section className="pb-5">

@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
 import { Autoplay, Pagination, Navigation } from "swiper";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
   const { data } = useSWR(
@@ -45,8 +46,8 @@ const Banner = () => {
   );
 };
 function BannerItem({ item }) {
-  const { title, vote_average, backdrop_path } = item;
-
+  const { id, title, vote_average, backdrop_path } = item;
+  const navigate = useNavigate();
   return (
     <div className="w-full h-full rounded-lg relative">
       <div className="Banner-over"></div>
@@ -55,7 +56,7 @@ function BannerItem({ item }) {
         alt=""
         className="w-full h-full object-cover rounded-lg"
       />
-      <div className="w-full text-white absolute bottom-10 left-10">
+      <div className="w-full bottom-8 left-3 text-white absolute lg:bottom-10 lg:left-10">
         <h2 className="font-bold text-3xl mb-3">{title}</h2>
         <p className="mr-1 flex items-center mb-3 text-base font-bold lg:text-xl">
           <svg
@@ -73,8 +74,11 @@ function BannerItem({ item }) {
           {vote_average}
           <span className="test-base font-bold text-[#545454]">/10</span>
         </p>
-        <button className="py-3 px-6 bg-primary rounded-lg font-semibold">
-          Watch Now{" "}
+        <button
+          onClick={() => navigate(`/movie/${id}`)}
+          className="px-3 py-2 lg:py-3 lg:px-6 bg-primary rounded-lg font-semibold"
+        >
+          Watch Now
           <svg
             stroke="currentColor"
             fill="currentColor"

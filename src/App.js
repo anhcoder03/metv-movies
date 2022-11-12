@@ -79,7 +79,7 @@ function App() {
               path="/movie/:movieId"
               element={
                 <>
-                  <MovieDetailPage />
+                  <MovieDetailPage></MovieDetailPage>
                 </>
               }
             ></Route>

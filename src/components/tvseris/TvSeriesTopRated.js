@@ -21,7 +21,19 @@ const TvSeriesTopRated = () => {
   return (
     <div className="movies-list">
       <Swiper
-        slidesPerView={5}
+        breakpoints={{
+          // when window width is >= 640px
+          350: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 4,
+          },
+          // when window width is >= 768px
+          1023: {
+            slidesPerView: 5,
+          },
+        }}
         spaceBetween={10}
         slidesPerGroup={5}
         loop={true}

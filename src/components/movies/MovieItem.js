@@ -16,7 +16,7 @@ const MovieItem = ({ item }) => {
         <div className="flex items-center justify-between text-sm opacity-50 mb-10">
           <span>{new Date(release_date).getFullYear()}</span>
           <span>
-            {vote_average}
+            {parseFloat(vote_average).toFixed(1)}
             <svg
               stroke="currentColor"
               fill="currentColor"

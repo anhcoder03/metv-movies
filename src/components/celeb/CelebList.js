@@ -11,9 +11,8 @@ const CelebList = () => {
   );
 
   const movies = data?.results || [];
-  console.log(movies);
   return (
-    <div className="celeb-list grid grid-cols-5 gap-3">
+    <div className="celeb-list grid grid-cols-2 lg:grid-cols-5 gap-3">
       {movies.length > 0 &&
         movies.map((item) => <CelebItem key={item.id} item={item}></CelebItem>)}
     </div>
