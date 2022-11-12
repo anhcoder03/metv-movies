@@ -1,8 +1,9 @@
 import React from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const MovieItem = ({ item }) => {
-  const { title, vote_average, release_date, poster_path } = item;
+  const navigate = useNavigate();
+  const { title, vote_average, release_date, poster_path, id } = item;
   return (
     <div className="movie-cart cursor-pointer flex flex-col h-full rounded-lg p-3 bg-[#33292e] transition-all text-white select-none hover:bg-[#3d3137]">
       <img
@@ -30,7 +31,10 @@ const MovieItem = ({ item }) => {
             </svg>
           </span>
         </div>
-        <button className="flex w-full items-center justify-center rounded-[10px] bg-primary py-2 font-medium outline-none transition-all hover:bg-red-400">
+        <button
+          onClick={() => navigate(`/movie/${id}`)}
+          className="flex w-full items-center justify-center rounded-[10px] bg-primary py-2 font-medium outline-none transition-all hover:bg-red-400"
+        >
           Watch Now
           <svg
             stroke="currentColor"

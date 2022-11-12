@@ -4,6 +4,7 @@ import Main from "./components/layout/Main";
 import CelebsPage from "./pages/CelebsPage";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
+import MovieDetailPage from "./pages/MovieDetailPage";
 import ResultSearchPage from "./pages/ResultSearchPage";
 import SignUpPage from "./pages/SignUpPage";
 import TvSeries from "./pages/TvSeries";
@@ -69,6 +70,16 @@ function App() {
               element={
                 <>
                   <SignUpPage></SignUpPage>
+                </>
+              }
+            ></Route>
+          </Route>
+          <Route element={<Main></Main>}>
+            <Route
+              path="/movie/:movieId"
+              element={
+                <>
+                  <MovieDetailPage />
                 </>
               }
             ></Route>
