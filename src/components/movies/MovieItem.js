@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import LoadingSkeleton from "../loading/LoadingSkeleton";
 
 const MovieItem = ({ item }) => {
   const navigate = useNavigate();
@@ -55,3 +56,29 @@ const MovieItem = ({ item }) => {
 };
 
 export default MovieItem;
+export const MovieCardSkeleton = () => {
+  return (
+    <div className="movie-cart cursor-pointer flex flex-col h-full rounded-lg p-3 bg-[#33292e] transition-all text-white select-none hover:bg-[#3d3137]">
+      <LoadingSkeleton
+        width="100%"
+        height="250px"
+        radius="8px"
+        className="mb-5"
+      ></LoadingSkeleton>
+      <div className="flex flex-col flex-1">
+        <LoadingSkeleton
+          width="100%"
+          height="20px"
+          radius="8px"
+          className="text-xl font-bold mb-3 truncate"
+        ></LoadingSkeleton>
+        <LoadingSkeleton className="flex items-center justify-between text-sm opacity-50 mb-10"></LoadingSkeleton>
+        <LoadingSkeleton
+          width="100%"
+          height="40px"
+          className="flex w-full items-center justify-center rounded-[10px] bg-primary py-2 font-medium outline-none transition-all hover:bg-red-400"
+        ></LoadingSkeleton>
+      </div>
+    </div>
+  );
+};

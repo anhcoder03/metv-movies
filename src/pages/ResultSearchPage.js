@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import useSWR from "swr";
-import MovieItem from "../components/movies/MovieItem";
+import MovieItem, { MovieCardSkeleton } from "../components/movies/MovieItem";
 import { fetcher } from "../config";
 
 const ResultSearchPage = () => {
@@ -23,7 +23,19 @@ const ResultSearchPage = () => {
           Movies Search List
         </h2>
         {loading && (
-          <div className="w-10 h-10 rounded-full border-4 border-primary border-t-transparent border-t-4 mx-auto animate-spin"></div>
+          <div className="w-10 h-10 rounded-full border-4 border-primary border-t-transparent border-t-4 mx-auto animate-spin mb-5"></div>
+        )}
+        {loading && (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <MovieCardSkeleton></MovieCardSkeleton>
+            <MovieCardSkeleton></MovieCardSkeleton>
+            <MovieCardSkeleton></MovieCardSkeleton>
+            <MovieCardSkeleton></MovieCardSkeleton>
+            <MovieCardSkeleton></MovieCardSkeleton>
+            <MovieCardSkeleton></MovieCardSkeleton>
+            <MovieCardSkeleton></MovieCardSkeleton>
+            <MovieCardSkeleton></MovieCardSkeleton>
+          </div>
         )}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {movies.length > 0 &&

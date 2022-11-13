@@ -52,7 +52,7 @@ const MovieCredit = () => {
       >
         {cast.length > 0 &&
           cast.map((el) => (
-            <SwiperSlide key={el.id}>
+            <SwiperSlide key={el.cast_id}>
               <MovieCreditItem item={el}></MovieCreditItem>
             </SwiperSlide>
           ))}

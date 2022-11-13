@@ -36,7 +36,7 @@ const Sidebar = () => {
             onClick={handleClickSidebar}
             stroke="currentColor"
             fill="currentColor"
-            stroke-width="0"
+            strokeWidth="0"
             viewBox="0 0 512 512"
             className="rounded-[10px] bg-[#252229] p-2 mr-2 text-[44px] lg:hidden"
             height="1em"
