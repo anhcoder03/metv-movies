@@ -1,20 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import useSWR from "swr";
 import MovieItem, { MovieCardSkeleton } from "../components/movies/MovieItem";
 import { fetcher } from "../config";
+import ReactPaginate from "react-paginate";
 
+const itemsPerPage = 20;
 const ResultSearchPage = () => {
+  const [pageCount, setPageCount] = useState(0);
+  const [nextPage, setNextPage] = useState(1);
+  const [itemOffset, setItemOffset] = useState(0);
   const { search } = useLocation();
-  // https://api.themoviedb.org/3/search/movie?api_key=95f2419536f533cdaa1dadf83c606027&query=${filterDebounce}
-  // const [movies, setMovies] = useState([]);
   let query = new URLSearchParams(search);
   const filter = query.get("query");
   const { data } = useSWR(
-    `https://api.themoviedb.org/3/search/movie?api_key=95f2419536f533cdaa1dadf83c606027&query=${filter}`,
+    `https://api.themoviedb.org/3/search/movie?api_key=95f2419536f533cdaa1dadf83c606027&query=${filter}&page=${nextPage}`,
     fetcher
   );
   const movies = data?.results || [];
+  console.log(data);
+  useEffect(() => {
+    if (!data || !data.total_pages) return;
+    setPageCount(Math.ceil(data.total_results / itemsPerPage));
+  }, [data, itemOffset]);
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % data.total_results;
+    setItemOffset(newOffset);
+    setNextPage(event.selected + 1);
+  };
   const loading = !data;
   return (
     <div className="no-scrollbar h-screen mt-14 overflow-scroll w-full bg-[#252229] lg:w-[70%] lg:mt-0 lg:ml-[10%]">
@@ -44,6 +57,28 @@ const ResultSearchPage = () => {
             ))}
         </div>
       </div>
+      {/* {!loading && ( */}
+      <div className="pb-10">
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="next >"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={2}
+          pageCount={pageCount}
+          marginPagesDisplayed={window.innerHeight <= 1024 ? 1 : 3}
+          disableInitialCallback={true}
+          previousLabel="< previous"
+          renderOnZeroPageCount={null}
+          className="mt-10 flex flex-wrap items-center justify-center gap-x-2 gap-y-[6px] text-[15px] text-[#ececec] lg:gap-x-3 lg:text-base"
+          pageLinkClassName="bg-[#33292E] bg-opacity-80  transition-all hover:bg-opacity-100 py-1 px-2 rounded-[5px]"
+          previousClassName="bg-[#33292E] bg-opacity-80  transition-all hover:bg-opacity-100 py-1 px-2 rounded-[5px]"
+          nextClassName="bg-[#33292E] bg-opacity-80  transition-all hover:bg-opacity-100 py-1 px-2 rounded-[5px]"
+          activeClassName="text-primary"
+          disabledClassName="opacity-40"
+          disabledLinkClassName="hover:cursor-default"
+        />
+      </div>
+      {/* )} */}
     </div>
   );
 };
