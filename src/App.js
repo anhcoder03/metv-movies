@@ -46,7 +46,7 @@ function App() {
           </Route>
           <Route element={<Main></Main>}>
             <Route
-              path="/movies/search/page/:page"
+              path="/movies/search/page/:page/"
               element={
                 <>
                   <ResultSearchPage />

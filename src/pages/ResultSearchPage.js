@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useSWR from "swr";
 import MovieItem, { MovieCardSkeleton } from "../components/movies/MovieItem";
 import { fetcher } from "../config";
@@ -11,6 +11,7 @@ const ResultSearchPage = () => {
   const [nextPage, setNextPage] = useState(1);
   const [itemOffset, setItemOffset] = useState(0);
   const { search } = useLocation();
+  const navigate = useNavigate();
   let query = new URLSearchParams(search);
   const filter = query.get("query");
   const { data } = useSWR(
@@ -18,7 +19,6 @@ const ResultSearchPage = () => {
     fetcher
   );
   const movies = data?.results || [];
-  console.log(data);
   useEffect(() => {
     if (!data || !data.total_pages) return;
     setPageCount(Math.ceil(data.total_results / itemsPerPage));
@@ -26,7 +26,13 @@ const ResultSearchPage = () => {
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % data.total_results;
     setItemOffset(newOffset);
-    setNextPage(event.selected + 1);
+    setNextPage(parseInt(event.selected + 1));
+
+    let pageLink = event.selected + 1;
+    navigate({
+      pathname: `/movies/search/page/${pageLink}`,
+      search: `?query=${filter}`,
+    });
   };
   const loading = !data;
   return (
@@ -50,14 +56,15 @@ const ResultSearchPage = () => {
             <MovieCardSkeleton></MovieCardSkeleton>
           </div>
         )}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          {movies.length > 0 &&
-            movies.map((item) => (
-              <MovieItem key={item.id} item={item}></MovieItem>
-            ))}
-        </div>
+        {!loading && (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            {movies.length > 0 &&
+              movies.map((item) => (
+                <MovieItem key={item.id} item={item}></MovieItem>
+              ))}
+          </div>
+        )}
       </div>
-      {/* {!loading && ( */}
       <div className="pb-10">
         <ReactPaginate
           breakLabel="..."
@@ -69,16 +76,15 @@ const ResultSearchPage = () => {
           disableInitialCallback={true}
           previousLabel="< previous"
           renderOnZeroPageCount={null}
-          className="mt-10 flex flex-wrap items-center justify-center gap-x-2 gap-y-[6px] text-[15px] text-[#ececec] lg:gap-x-3 lg:text-base"
-          pageLinkClassName="bg-[#33292E] bg-opacity-80  transition-all hover:bg-opacity-100 py-1 px-2 rounded-[5px]"
+          className="mb-10 flex flex-wrap items-center justify-center gap-x-2 gap-y-[6px] text-[15px] text-[#ececec] lg:gap-x-3 lg:text-base lg:mb-0 "
+          pageLinkClassName="bg-[#33292E] bg-opacity-80 page-link transition-all hover:bg-opacity-100 py-1 px-2 rounded-[5px]"
           previousClassName="bg-[#33292E] bg-opacity-80  transition-all hover:bg-opacity-100 py-1 px-2 rounded-[5px]"
-          nextClassName="bg-[#33292E] bg-opacity-80  transition-all hover:bg-opacity-100 py-1 px-2 rounded-[5px]"
-          activeClassName="text-primary"
+          nextClassName="bg-[#33292E] nextPage bg-opacity-80  transition-all hover:bg-opacity-100 py-1 px-2 rounded-[5px]"
+          activeClassName="page-active text-primary"
           disabledClassName="opacity-40"
           disabledLinkClassName="hover:cursor-default"
         />
       </div>
-      {/* )} */}
     </div>
   );
 };
