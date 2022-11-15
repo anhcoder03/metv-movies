@@ -11,11 +11,13 @@ const Sidebar = () => {
   const navigate = useNavigate();
   function handleSubmit(event) {
     event.preventDefault();
-    // fuck 8 hours mine =))
     const input = event.target.querySelectorAll(".inputtt");
     navigate({
       pathname: `/movies/search/page/1`,
       search: `?${createSearchParams({ query: input[0].value })}`,
+      state: {
+        page: 1,
+      },
     });
   }
   function handleClickSidebar() {

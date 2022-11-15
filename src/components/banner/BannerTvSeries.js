@@ -20,27 +20,29 @@ const BannerTvSeries = () => {
       {loading && (
         <div className="w-10 h-10 rounded-full border-4 border-primary border-t-4 border-t-transparent mx-auto animate-spin mb-10"></div>
       )}
-      <Swiper
-        grabCursor="true"
-        slidesPerView={"auto"}
-        // navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
-        loopFillGroupWithBlank={true}
-        pagination={{
-          clickable: true,
-        }}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-      >
-        {movies.length > 0 &&
-          movies.map((item) => (
-            <SwiperSlide key={item.id}>
-              <BannerItem item={item}></BannerItem>
-            </SwiperSlide>
-          ))}
-      </Swiper>
+      {!loading && (
+        <Swiper
+          grabCursor="true"
+          slidesPerView={"auto"}
+          // navigation={true}
+          modules={[Autoplay, Pagination, Navigation]}
+          loopFillGroupWithBlank={true}
+          pagination={{
+            clickable: true,
+          }}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+        >
+          {movies.length > 0 &&
+            movies.map((item) => (
+              <SwiperSlide key={item.id}>
+                <BannerItem item={item}></BannerItem>
+              </SwiperSlide>
+            ))}
+        </Swiper>
+      )}
     </section>
   );
 };

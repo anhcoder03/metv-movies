@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useSWR from "swr";
 import MovieItem, { MovieCardSkeleton } from "../components/movies/MovieItem";
 import { fetcher } from "../config";
@@ -7,17 +7,18 @@ import ReactPaginate from "react-paginate";
 
 const itemsPerPage = 20;
 const ResultSearchPage = () => {
+  const { page } = useParams();
   const [pageCount, setPageCount] = useState(0);
-  const [nextPage, setNextPage] = useState(1);
   const [itemOffset, setItemOffset] = useState(0);
   const { search } = useLocation();
   const navigate = useNavigate();
   let query = new URLSearchParams(search);
   const filter = query.get("query");
   const { data } = useSWR(
-    `https://api.themoviedb.org/3/search/movie?api_key=95f2419536f533cdaa1dadf83c606027&query=${filter}&page=${nextPage}`,
+    `https://api.themoviedb.org/3/search/movie?api_key=95f2419536f533cdaa1dadf83c606027&query=${filter}&page=${page}`,
     fetcher
   );
+  console.log(data);
   const movies = data?.results || [];
   useEffect(() => {
     if (!data || !data.total_pages) return;
@@ -26,8 +27,6 @@ const ResultSearchPage = () => {
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % data.total_results;
     setItemOffset(newOffset);
-    setNextPage(parseInt(event.selected + 1));
-
     let pageLink = event.selected + 1;
     navigate({
       pathname: `/movies/search/page/${pageLink}`,
@@ -67,6 +66,10 @@ const ResultSearchPage = () => {
       </div>
       <div className="pb-10">
         <ReactPaginate
+          forcePage={page}
+          hrefBuilder={() => {
+            return "#";
+          }}
           breakLabel="..."
           nextLabel="next >"
           onPageChange={handlePageClick}

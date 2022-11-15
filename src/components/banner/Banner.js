@@ -10,14 +10,17 @@ import { Autoplay, Pagination, Navigation } from "swiper";
 import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
-  const { data } = useSWR(
+  const { data, error } = useSWR(
     `https://api.themoviedb.org/3/movie/upcoming?api_key=95f2419536f533cdaa1dadf83c606027`,
     fetcher
   );
   const movies = data?.results || [];
-
+  const loading = !data && error;
   return (
     <section className="banner page-container mb-10 overflow-hidden">
+      {loading && (
+        <div className="w-10 h-10 rounded-full border-4 border-primary border-t-4 border-t-transparent mx-auto animate-spin mb-10"></div>
+      )}
       <Swiper
         grabCursor="true"
         slidesPerView={"auto"}

@@ -17,23 +17,25 @@ const HomePage = () => {
       {loading && (
         <div className="w-10 h-10 mt-10 rounded-full border-4 border-primary border-t-4 border-t-transparent mx-auto animate-spin mb-10"></div>
       )}
-      <div className="px-3 py-10 lg:p-10">
-        <Banner></Banner>
-        <div className="relative">
-          <section className="pb-5">
-            <h2 className="text-white font-bold text-3xl mb-10">
-              Popular movies
-            </h2>
-            <MoviePopular></MoviePopular>
-          </section>
-          <section className="pb-5">
-            <h2 className="text-white font-bold text-3xl mb-10">
-              Top rated movies
-            </h2>
-            <MovieTopRated></MovieTopRated>
-          </section>
+      {!loading && (
+        <div className="px-3 py-10 lg:p-10">
+          <Banner></Banner>
+          <div className="relative">
+            <section className="pb-5">
+              <h2 className="text-white font-bold text-3xl mb-10">
+                Popular movies
+              </h2>
+              <MoviePopular></MoviePopular>
+            </section>
+            <section className="pb-5">
+              <h2 className="text-white font-bold text-3xl mb-10">
+                Top rated movies
+              </h2>
+              <MovieTopRated></MovieTopRated>
+            </section>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
